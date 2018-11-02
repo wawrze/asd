@@ -58,11 +58,13 @@ public class Main {
                 System.out.print("Enter size of the array: ");
                 int size = sc.nextInt();
                 array = new int[size];
-                for(int i = 0;i < size;i++) {
-                    System.out.print("Enter " + (i + 1) + " number: ");
-                    int tmp = sc.nextInt();
-                    array[i] = tmp;
-                }
+                IntStream.iterate(0, i -> ++i)
+                        .limit(size)
+                        .forEach(i -> {
+                            System.out.print("Enter " + (i + 1) + " number: ");
+                            int tmp = sc.nextInt();
+                            array[i] = tmp;
+                        });
                 runAlgorithms(array);
                 break;
             default:
@@ -71,7 +73,7 @@ public class Main {
     }
 
     private int algorithm1(int[] array) {
-        final List<Integer> tmp = new ArrayList<>();
+        List<Integer> tmp = new ArrayList<>();
         IntStream.iterate(0, i -> ++i)
                 .limit(array.length)
                 .forEach(i -> tmp.add(array[i]));
@@ -83,27 +85,64 @@ public class Main {
             condition = false;
             for(int i = 1;i < tmp1.size();i++) {
                 for (int j = 0; j < i; j++) {
-                    if (tmp1.get(i) > 0 && tmp1.get(i) == tmp1.get(j)) {
+                    if (tmp1.get(i) >= 0 && tmp1.get(i) == tmp1.get(j)) {
                         tmp2.set(i, tmp1.get(i) * 2);
                         tmp1.set(j, null);
                         tmp1.set(i, -1);
                         condition = true;
                     }
-                    basicOperationsCounter += 2;
+                    basicOperationsCounter++;
                 }
             }
             for(int j = tmp1.size() - 1;j >= 0;j--)
                 if(tmp1.get(j) == null)
                     tmp2.remove(j);
             tmp1 = new ArrayList<>(tmp2);
-
         } while(condition);
         System.out.println("Number of basic operations made by algorithm 1: " + basicOperationsCounter);
         return tmp1.size();
     }
 
     private int algorithm2(int[] array) {
-        return 2;
+        int max = 1000;
+        int basicOperationsCounter = 0;
+        List<Integer> sorted;
+        boolean condition;
+        do {
+            sorted  = new ArrayList<>();
+            condition = false;
+            int[] tmpArray = new int[max + 1];
+            for(int i = 0;i < array.length;i++) {
+                tmpArray[array[i]]++;
+            }
+            for(int i = 0;i < max;i++) {
+                for(int j = tmpArray[i]; j > 0;j--) {
+                    sorted.add(i);
+                }
+            }
+            int pointer = 0;
+            do {
+                if(sorted.get(pointer) == sorted.get(pointer + 1)) {
+                    sorted.set(pointer + 1, sorted.get(pointer) * 2);
+                    sorted.set(pointer, null);
+                    pointer++;
+                    condition = true;
+                }
+                basicOperationsCounter++;
+                pointer++;
+            } while(pointer < sorted.size() - 1);
+            for(int i = sorted.size() - 1;i >= 0;i--) {
+                if(sorted.get(i) == null) {
+                    sorted.remove(i);
+                }
+            }
+            array = new int[sorted.size()];
+            for(int i = 0;i < array.length;i++) {
+                array[i] = sorted.get(i);
+            }
+        } while(condition);
+        System.out.println("Number of basic operations made by algorithm 2: " + basicOperationsCounter);
+        return sorted.size();
     }
 
     public int[] runAlgorithms(int[] array) {
@@ -167,8 +206,9 @@ public class Main {
                 .limit(size)
                 .forEach(i -> array[i] = rand.nextInt(10));
         System.out.println("Generated numbers:");
-        for(Integer i : array)
-            System.out.println(i);
+        IntStream.iterate(0, i -> ++i)
+                .limit(array.length)
+                .forEach(i -> System.out.println(array[i]));
         return array;
     }
 
