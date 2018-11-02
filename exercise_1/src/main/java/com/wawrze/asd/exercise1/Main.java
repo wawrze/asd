@@ -63,6 +63,10 @@ public class Main {
                         .forEach(i -> {
                             System.out.print("Enter " + (i + 1) + " number: ");
                             int tmp = sc.nextInt();
+                            while(tmp < 0) {
+                                System.out.print("Number has to be positive! Enter new number: ");
+                                tmp = sc.nextInt();
+                            }
                             array[i] = tmp;
                         });
                 runAlgorithms(array);
@@ -73,6 +77,14 @@ public class Main {
     }
 
     private int algorithm1(int[] array) {
+        switch(array.length) {
+            case 0:
+                return 0;
+            case 1:
+                return 1;
+            default:
+                break;
+        }
         List<Integer> tmp = new ArrayList<>();
         IntStream.iterate(0, i -> ++i)
                 .limit(array.length)
@@ -104,6 +116,14 @@ public class Main {
     }
 
     private int algorithm2(int[] array) {
+        switch(array.length) {
+            case 0:
+                return 0;
+            case 1:
+                return 1;
+            default:
+                break;
+        }
         int max = 1000;
         int basicOperationsCounter = 0;
         List<Integer> sorted;
@@ -120,17 +140,17 @@ public class Main {
                     sorted.add(i);
                 }
             }
-            int pointer = 0;
-            do {
-                if(sorted.get(pointer) == sorted.get(pointer + 1)) {
-                    sorted.set(pointer + 1, sorted.get(pointer) * 2);
-                    sorted.set(pointer, null);
+            int pointer = 1;
+            while(pointer < sorted.size()) {
+                if(sorted.get(pointer - 1) == sorted.get(pointer)) {
+                    sorted.set(pointer, sorted.get(pointer) * 2);
+                    sorted.set(pointer - 1, null);
                     pointer++;
                     condition = true;
                 }
                 basicOperationsCounter++;
                 pointer++;
-            } while(pointer < sorted.size() - 1);
+            }
             for(int i = sorted.size() - 1;i >= 0;i--) {
                 if(sorted.get(i) == null) {
                     sorted.remove(i);
@@ -146,8 +166,6 @@ public class Main {
     }
 
     public int[] runAlgorithms(int[] array) {
-        if(array.length == 0)
-            throw new RuntimeException("Incorrect input!!!");
         int[] result = new int[2];
         result[0] = algorithm1(array);
         result[1] = algorithm2(array);
@@ -204,7 +222,7 @@ public class Main {
         int[] array = new int[size];
         IntStream.iterate(0, i -> ++i)
                 .limit(size)
-                .forEach(i -> array[i] = rand.nextInt(10));
+                .forEach(i -> array[i] = rand.nextInt(1000));
         System.out.println("Generated numbers:");
         IntStream.iterate(0, i -> ++i)
                 .limit(array.length)
