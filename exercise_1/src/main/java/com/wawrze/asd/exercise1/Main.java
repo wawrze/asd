@@ -3,9 +3,7 @@ package com.wawrze.asd.exercise1;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.NoSuchElementException;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.IntStream;
 
 public class Main {
@@ -17,8 +15,6 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         String o;
         do {
-            for (int i = 0; i < 100; i++)
-                System.out.println();
             System.out.println("Choose option:");
             System.out.println("(f) Run algorithms from file (\"in.txt\")");
             System.out.println("(g) Generate random file");
@@ -75,12 +71,38 @@ public class Main {
     }
 
     private int algorithm1(int[] array) {
+        final List<Integer> tmp = new ArrayList<>();
+        IntStream.iterate(0, i -> ++i)
+                .limit(array.length)
+                .forEach(i -> tmp.add(array[i]));
+        List<Integer> tmp1 = new ArrayList<>(tmp);
+        List<Integer> tmp2 = new ArrayList<>(tmp);
+        boolean condition;
+        int basicOperationsCounter = 0;
+        do {
+            condition = false;
+            for(int i = 1;i < tmp1.size();i++) {
+                for (int j = 0; j < i; j++) {
+                    if (tmp1.get(i) > 0 && tmp1.get(i) == tmp1.get(j)) {
+                        tmp2.set(i, tmp1.get(i) * 2);
+                        tmp1.set(j, null);
+                        tmp1.set(i, -1);
+                        condition = true;
+                    }
+                    basicOperationsCounter += 2;
+                }
+            }
+            for(int j = tmp1.size() - 1;j >= 0;j--)
+                if(tmp1.get(j) == null)
+                    tmp2.remove(j);
+            tmp1 = new ArrayList<>(tmp2);
 
-        return 1;
+        } while(condition);
+        System.out.println("Number of basic operations made by algorithm 1: " + basicOperationsCounter);
+        return tmp1.size();
     }
 
     private int algorithm2(int[] array) {
-
         return 2;
     }
 
