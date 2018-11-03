@@ -1,3 +1,4 @@
 rootProject.name = 'ads'
 include 'exercise_1'
+include 'exercise_2'
 

@@ -1,4 +1,4 @@
-package com.wawrze.asd.exercise1;
+package com.wawrze.asd.exercise2;
 
 import org.junit.After;
 import org.junit.Assert;
