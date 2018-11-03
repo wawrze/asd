@@ -3,6 +3,8 @@ package com.wawrze.asd.exercise2;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.stream.IntStream;
@@ -33,7 +35,7 @@ public class Fibonacci implements Algorithm {
         switch (o) {
             case "g":
                 int n = rand.nextInt(9999) + 1;
-                File file = new File("In0201.txt.txt");
+                File file = new File("In0201.txt");
                 if(!file.exists()) {
                     try {
                         file.createNewFile();
@@ -48,7 +50,7 @@ public class Fibonacci implements Algorithm {
                 System.out.println("Generated number " + n + " saved to file \"In0201.txt\"");
                 writer.close();
                 break;
-            case "r":
+            case "f":
                 n = fileReader();
                 runAlgorithm(n);
                 break;
@@ -67,23 +69,38 @@ public class Fibonacci implements Algorithm {
             System.out.println("Incorrect input: " + n + "!");
         }
         else {
-            int[] result = new int[n + 1];
-
-            //PLACE FOR CALLING THE ALGORITHM
-
-            writer.println("Result of the algorithm:\n n=" + n);
+            List<Integer> result = new ArrayList<>();
+            int tmp;
+            for(int i = 0;;i++) {
+                tmp = fibonacci(i);
+                if(tmp < n) {
+                    result.add(tmp);
+                    continue;
+                }
+                else {
+                    break;
+                }
+            }
+            System.out.println("Result of the algorithm:\n n=" + n);
             IntStream.iterate(0, i -> ++i)
-                    .limit(result.length - 1)
-                    .forEach(i -> System.out.print(result[i] + ", "));
-            System.out.print(result[result.length - 1] + "\n");
+                    .limit(result.size() - 1)
+                    .forEach(i -> System.out.print(result.get(i) + ", "));
+            System.out.print(result.get(result.size() - 1) + "\n");
             fileWriter(n, result);
             System.out.println("Result saved to file \"Out02.01.txt\"");
         }
     }
 
-    //PLACE FOR RECURSIVE VERSION OF FIBONACCI ALGORITHM
+    private int fibonacci(int n) {
+        if(n <= 1) {
+            return n;
+        }
+        else {
+            return fibonacci(n - 1) + fibonacci(n - 2);
+        }
+    }
 
-    private void fileWriter(int n, int[] fibonacci) {
+    private void fileWriter(int n, List<Integer> fibonacci) {
         File file = new File("Out02.01.txt");
         if(!file.exists()) {
             try {
@@ -97,9 +114,9 @@ public class Fibonacci implements Algorithm {
         catch(IOException e) {}
         writer.print("n=" + n);
         IntStream.iterate(0, i -> ++i)
-                .limit(fibonacci.length - 1)
-                .forEach(i -> writer.print(fibonacci[i] + ", "));
-        writer.print(fibonacci[fibonacci.length - 1]);
+                .limit(fibonacci.size()- 1)
+                .forEach(i -> writer.print(fibonacci.get(i) + ", "));
+        writer.print(fibonacci.get(fibonacci.size() - 1));
         writer.close();
     }
 
@@ -113,8 +130,9 @@ public class Fibonacci implements Algorithm {
             System.out.println("File " + file.getName() + " couldn't be opened!");
             return 0;
         }
+        int n = reader.nextInt();
         reader.close();
-        return reader.nextInt();
+        return n;
     }
 
 }

@@ -19,7 +19,7 @@ public class FibonacciTestSuite {
     public void beforeTest() {
         File file = null;
         try {
-            file = new File("Out0201.txt");
+            file = new File("Out02.01.txt");
             reader = new Scanner(file);
         }
         catch(IOException e) {}
@@ -42,8 +42,8 @@ public class FibonacciTestSuite {
         tmpResult1 = reader.nextLine();
         tmpResult2 = tmpResult1.split(", ");
         result = new int[tmpResult2.length];
-        IntStream.iterate(0, i -> ++i)
-                .limit(tmpResult2.length)
+        IntStream.iterate(1, i -> ++i)
+                .limit(tmpResult2.length - 1)
                 .forEach(i -> result[i] = Integer.valueOf(tmpResult2[i]));
         //Then
         Assert.assertEquals(15, result.length);
@@ -67,26 +67,6 @@ public class FibonacciTestSuite {
     @Test
     public void testFibonacci2() {
         //Given
-        int n = 0;
-        int[] result;
-        String tmpResult1;
-        String[] tmpResult2;
-        //When
-        fibonacci.runAlgorithm(n);
-        tmpResult1 = reader.nextLine();
-        tmpResult2 = tmpResult1.split(", ");
-        result = new int[tmpResult2.length];
-        IntStream.iterate(0, i -> ++i)
-                .limit(tmpResult2.length)
-                .forEach(i -> result[i] = Integer.valueOf(tmpResult2[i]));
-        //Then
-        Assert.assertEquals(1, result.length);
-        Assert.assertEquals(0, result[0]);
-    }
-
-    @Test
-    public void testFibonacci3() {
-        //Given
         int n = 1;
         int[] result;
         String tmpResult1;
@@ -96,8 +76,8 @@ public class FibonacciTestSuite {
         tmpResult1 = reader.nextLine();
         tmpResult2 = tmpResult1.split(", ");
         result = new int[tmpResult2.length];
-        IntStream.iterate(0, i -> ++i)
-                .limit(tmpResult2.length)
+        IntStream.iterate(1, i -> ++i)
+                .limit(tmpResult2.length - 1)
                 .forEach(i -> result[i] = Integer.valueOf(tmpResult2[i]));
         //Then
         Assert.assertEquals(1, result.length);
@@ -105,7 +85,7 @@ public class FibonacciTestSuite {
     }
 
     @Test
-    public void testFibonacci4() {
+    public void testFibonacci3() {
         //Given
         int n = 2;
         int[] result;
@@ -116,12 +96,37 @@ public class FibonacciTestSuite {
         tmpResult1 = reader.nextLine();
         tmpResult2 = tmpResult1.split(", ");
         result = new int[tmpResult2.length];
-        IntStream.iterate(0, i -> ++i)
-                .limit(tmpResult2.length)
+        IntStream.iterate(1, i -> ++i)
+                .limit(tmpResult2.length - 1)
                 .forEach(i -> result[i] = Integer.valueOf(tmpResult2[i]));
         //Then
-        Assert.assertEquals(1, result.length);
+        Assert.assertEquals(3, result.length);
         Assert.assertEquals(0, result[0]);
+        Assert.assertEquals(1, result[1]);
+        Assert.assertEquals(1, result[2]);
+    }
+
+    @Test
+    public void testFibonacci4() {
+        //Given
+        int n = 3;
+        int[] result;
+        String tmpResult1;
+        String[] tmpResult2;
+        //When
+        fibonacci.runAlgorithm(n);
+        tmpResult1 = reader.nextLine();
+        tmpResult2 = tmpResult1.split(", ");
+        result = new int[tmpResult2.length];
+        IntStream.iterate(1, i -> ++i)
+                .limit(tmpResult2.length - 1)
+                .forEach(i -> result[i] = Integer.valueOf(tmpResult2[i]));
+        //Then
+        Assert.assertEquals(4, result.length);
+        Assert.assertEquals(0, result[0]);
+        Assert.assertEquals(1, result[1]);
+        Assert.assertEquals(1, result[2]);
+        Assert.assertEquals(2, result[3]);
     }
 
     @Test
@@ -136,8 +141,8 @@ public class FibonacciTestSuite {
         tmpResult1 = reader.nextLine();
         tmpResult2 = tmpResult1.split(", ");
         result = new int[tmpResult2.length];
-        IntStream.iterate(0, i -> ++i)
-                .limit(tmpResult2.length)
+        IntStream.iterate(1, i -> ++i)
+                .limit(tmpResult2.length - 1)
                 .forEach(i -> result[i] = Integer.valueOf(tmpResult2[i]));
         //Then
         Assert.assertEquals(20, result.length);
