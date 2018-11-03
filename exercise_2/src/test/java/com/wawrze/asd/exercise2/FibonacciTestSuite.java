@@ -19,7 +19,7 @@ public class FibonacciTestSuite {
     public void beforeTest() {
         File file = null;
         try {
-            file = new File("In0201.txt");
+            file = new File("Out0201.txt");
             reader = new Scanner(file);
         }
         catch(IOException e) {}
