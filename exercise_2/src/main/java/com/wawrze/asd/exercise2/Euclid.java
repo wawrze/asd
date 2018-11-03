@@ -11,6 +11,7 @@ public class Euclid implements Algorithm {
     private PrintWriter writer;
     private Scanner reader;
 
+    @Override
     public void menu() {
         Scanner sc = new Scanner(System.in);
         String o;
@@ -30,8 +31,8 @@ public class Euclid implements Algorithm {
         Random rand = new Random();
         switch (o) {
             case "g":
-                int a = rand.nextInt();
-                int b = rand.nextInt();
+                int a = Math.abs(rand.nextInt());
+                int b = Math.abs(rand.nextInt());
                 File file = new File("In0203.txt");
                 if (!file.exists()) {
                     try {
@@ -65,14 +66,19 @@ public class Euclid implements Algorithm {
     }
 
     private void runAlgorithm(int a, int b) {
-        int result = 0;
+        if(a < 0 || b < 0) {
+            System.out.println("Incorrect input: " + a  + ", " + b + "!");
+        }
+        else {
+            int result = 0;
 
-        //PLACE FOR CALLING THE ALGORITHM
+            //PLACE FOR CALLING THE ALGORITHM
 
-        System.out.println("Result of the algorithm:");
-        System.out.println("NWD(" + a + "," + b + ")=" + result);
-        fileWriter(a, b, result);
-        System.out.println("Result saved to file \"Out0203.txt\"");
+            System.out.println("Result of the algorithm:");
+            System.out.println("NWD(" + a + "," + b + ")=" + result);
+            fileWriter(a, b, result);
+            System.out.println("Result saved to file \"Out0203.txt\"");
+        }
     }
 
     //PLACE FOR RECURSIVE VERSION OF EUCLIDS ALGORITHM

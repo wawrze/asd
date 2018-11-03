@@ -12,6 +12,7 @@ public class Fibonacci implements Algorithm {
     private PrintWriter writer;
     private Scanner reader;
 
+    @Override
     public void menu() {
         Scanner sc = new Scanner(System.in);
         String o;
@@ -62,17 +63,22 @@ public class Fibonacci implements Algorithm {
     }
 
     private void runAlgorithm(int n) {
-        int[] result = new int[n + 1];
+        if(n < 1 || n > 10000) {
+            System.out.println("Incorrect input: " + n + "!");
+        }
+        else {
+            int[] result = new int[n + 1];
 
-        //PLACE FOR CALLING THE ALGORITHM
+            //PLACE FOR CALLING THE ALGORITHM
 
-        writer.println("Result of the algorithm:\n n=" + n);
-        IntStream.iterate(0, i -> ++i)
-                .limit(result.length - 1)
-                .forEach(i -> System.out.print(result[i] + ", "));
-        System.out.print(result[result.length - 1] + "\n");
-        fileWriter(n, result);
-        System.out.println("Result saved to file \"Out02.01.txt\"");
+            writer.println("Result of the algorithm:\n n=" + n);
+            IntStream.iterate(0, i -> ++i)
+                    .limit(result.length - 1)
+                    .forEach(i -> System.out.print(result[i] + ", "));
+            System.out.print(result[result.length - 1] + "\n");
+            fileWriter(n, result);
+            System.out.println("Result saved to file \"Out02.01.txt\"");
+        }
     }
 
     //PLACE FOR RECURSIVE VERSION OF FIBONACCI ALGORITHM

@@ -1,0 +1,2 @@
+N=5
+null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null	// A1->B1, A2->B2, ... Ak->Bk,

@@ -12,6 +12,7 @@ public class Hanoi implements Algorithm {
     private PrintWriter writer;
     private Scanner reader;
 
+    @Override
     public void menu() {
         Scanner sc = new Scanner(System.in);
         String o;
@@ -62,17 +63,22 @@ public class Hanoi implements Algorithm {
     }
 
     private void runAlgorithm(int n) {
-        String[] result = new String[(int) Math.pow(2, (double) n) - 1];
+        if(n <= 0 || n > 10) {
+            System.out.println("Incorrect input: " + n + "!");
+        }
+        else {
+            String[] result = new String[(int) Math.pow(2, (double) n) - 1];
 
-        //PLACE FOR CALLING THE ALGORITHM
+            //PLACE FOR CALLING THE ALGORITHM
 
-        writer.println("Result of the algorithm:\n n=" + n);
-        IntStream.iterate(0, i -> ++i)
-                .limit(result.length - 1)
-                .forEach(i -> System.out.print(result[i] + ", "));
-        System.out.print(result[result.length - 1] + "\n");
-        fileWriter(n, result);
-        System.out.println("Result saved to file \"Out0202.txt\"");
+            writer.println("Result of the algorithm:\n n=" + n);
+            IntStream.iterate(0, i -> ++i)
+                    .limit(result.length - 1)
+                    .forEach(i -> System.out.print(result[i] + ", "));
+            System.out.print(result[result.length - 1] + "\n");
+            fileWriter(n, result);
+            System.out.println("Result saved to file \"Out0202.txt\"");
+        }
     }
 
     //PLACE FOR RECURSIVE VERSION OF HANOI ALGORITHM
