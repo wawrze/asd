@@ -62,7 +62,7 @@ public class EuclidTestSuite {
     @Test
     public void testEuclid3() {
         //Given
-        int a = 1127;
+        int a = 1122;
         int b = 867;
         int result;
         String[] tmpResult;

@@ -70,10 +70,7 @@ public class Euclid implements Algorithm {
             System.out.println("Incorrect input: " + a  + ", " + b + "!");
         }
         else {
-            int result = 0;
-
-            //PLACE FOR CALLING THE ALGORITHM
-
+            int result = euclid(a, b);
             System.out.println("Result of the algorithm:");
             System.out.println("NWD(" + a + "," + b + ")=" + result);
             fileWriter(a, b, result);
@@ -81,7 +78,14 @@ public class Euclid implements Algorithm {
         }
     }
 
-    //PLACE FOR RECURSIVE VERSION OF EUCLIDS ALGORITHM
+    private int euclid(int a, int b) {
+        if(b == 0) {
+            return a;
+        }
+        else {
+            return euclid(b, a % b);
+        }
+    }
 
     private void fileWriter(int a, int b, int result) {
         File file = new File("Out0203.txt");
@@ -108,10 +112,10 @@ public class Euclid implements Algorithm {
             System.out.println("File " + file.getName() + " couldn't be opened!");
             return new int[0];
         }
-        reader.close();
         int[] input = new int[2];
         input[0] = reader.nextInt();
         input[1] = reader.nextInt();
+        reader.close();
         return input;
     }
 
