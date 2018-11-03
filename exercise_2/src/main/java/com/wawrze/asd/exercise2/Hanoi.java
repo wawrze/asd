@@ -62,7 +62,7 @@ public class Hanoi implements Algorithm {
         }
     }
 
-    private void runAlgorithm(int n) {
+    public void runAlgorithm(int n) {
         if(n <= 0 || n > 10) {
             System.out.println("Incorrect input: " + n + "!");
         }

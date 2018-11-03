@@ -62,7 +62,7 @@ public class Fibonacci implements Algorithm {
         }
     }
 
-    private void runAlgorithm(int n) {
+    public void runAlgorithm(int n) {
         if(n < 1 || n > 10000) {
             System.out.println("Incorrect input: " + n + "!");
         }

@@ -65,7 +65,7 @@ public class Euclid implements Algorithm {
         }
     }
 
-    private void runAlgorithm(int a, int b) {
+    public void runAlgorithm(int a, int b) {
         if(a < 0 || b < 0) {
             System.out.println("Incorrect input: " + a  + ", " + b + "!");
         }
