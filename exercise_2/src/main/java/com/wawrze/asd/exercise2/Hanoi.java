@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.stream.IntStream;
 
 public class Hanoi implements Algorithm {
 
@@ -48,7 +47,7 @@ public class Hanoi implements Algorithm {
                 System.out.println("Generated number " + n + " saved to file \"In0202.txt\"");
                 writer.close();
                 break;
-            case "r":
+            case "f":
                 n = fileReader();
                 runAlgorithm(n);
                 break;
@@ -67,23 +66,27 @@ public class Hanoi implements Algorithm {
             System.out.println("Incorrect input: " + n + "!");
         }
         else {
-            String[] result = new String[(int) Math.pow(2, (double) n) - 1];
-
-            //PLACE FOR CALLING THE ALGORITHM
-
-            writer.println("Result of the algorithm:\n n=" + n);
-            IntStream.iterate(0, i -> ++i)
-                    .limit(result.length - 1)
-                    .forEach(i -> System.out.print(result[i] + ", "));
-            System.out.print(result[result.length - 1] + "\n");
+            String result = hanoi(n, 1, 2, 3);
+            System.out.println("Result of the algorithm:\n n=" + n);
+            System.out.println(result);
             fileWriter(n, result);
             System.out.println("Result saved to file \"Out0202.txt\"");
         }
     }
 
-    //PLACE FOR RECURSIVE VERSION OF HANOI ALGORITHM
+    private String hanoi(int n, int first, int second, int third) {
+        if(n == 1) {
+            return first + "->" + second + ", ";
+        }
+        else {
+            String result = hanoi(n - 1, first, third, second);
+            result += first + "->" + second + ", ";
+            result += hanoi(n - 1, third, second, first);
+            return result;
+        }
+    }
 
-    private void fileWriter(int n, String[] hanoi) {
+    private void fileWriter(int n, String hanoi) {
         File file = new File("Out0202.txt");
         if(!file.exists()) {
             try {
@@ -96,10 +99,7 @@ public class Hanoi implements Algorithm {
         }
         catch(IOException e) {}
         writer.println("N=" + n);
-        IntStream.iterate(0, i -> ++i)
-                .limit(hanoi.length - 1)
-                .forEach(i -> writer.print(hanoi[i] + ", "));
-        writer.print(hanoi[hanoi.length - 1]);
+        writer.print(hanoi);
         writer.print("\t// A1->B1, A2->B2, ... Ak->Bk,");
         writer.close();
     }
@@ -114,8 +114,9 @@ public class Hanoi implements Algorithm {
             System.out.println("File " + file.getName() + " couldn't be opened!");
             return 0;
         }
+        int n = reader.nextInt();
         reader.close();
-        return reader.nextInt();
+        return n;
     }
 
 }

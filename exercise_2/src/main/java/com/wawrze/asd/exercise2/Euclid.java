@@ -48,7 +48,7 @@ public class Euclid implements Algorithm {
                 System.out.println("Generated numbers " + a + ", " + b + " saved to file \"In0203.txt\"");
                 writer.close();
                 break;
-            case "r":
+            case "f":
                 a = fileReader()[0];
                 b = fileReader()[1];
                 runAlgorithm(a, b);

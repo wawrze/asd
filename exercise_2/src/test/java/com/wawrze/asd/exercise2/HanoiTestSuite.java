@@ -37,6 +37,7 @@ public class HanoiTestSuite {
         String expectedResult = "1->2, 1->3, 2->3, 1->2, 3->1, 3->2, 1->2";
         //When
         hanoi.runAlgorithm(n);
+        reader.nextLine();
         result = reader.nextLine();
         //Then
         Assert.assertTrue(result.contains(expectedResult));
@@ -51,6 +52,7 @@ public class HanoiTestSuite {
                 "3->2";
         //When
         hanoi.runAlgorithm(n);
+        reader.nextLine();
         result = reader.nextLine();
         //Then
         Assert.assertTrue(result.contains(expectedResult));
@@ -61,10 +63,11 @@ public class HanoiTestSuite {
         //Given
         int n = 5;
         String result;
-        String expectedResult = "1->2, 1->3, 3->3, 1->2, 2->1, 2->2, 1->2, 1->3, 3->3, 3->1, 2->1, 3->3, 1->2, 1->3, " +
-                "3->3, 1->2, 3->1, 3->2, 3->2, 3->1, 2->3, 2->1, 3->1, 3->2, 3->2, 3->3, 2->3, 3->2, 3->1, 3->2, 3->2";
+        String expectedResult = "1->2, 1->3, 2->3, 1->2, 3->1, 3->2, 1->2, 1->3, 2->3, 2->1, 3->1, 2->3, 1->2, 1->3, " +
+                "2->3, 1->2, 3->1, 3->2, 1->2, 3->1, 2->3, 2->1, 3->1, 3->2, 1->2, 1->3, 2->3, 1->2, 3->1, 3->2, 1->2";
         //When
         hanoi.runAlgorithm(n);
+        reader.nextLine();
         result = reader.nextLine();
         //Then
         Assert.assertTrue(result.contains(expectedResult));
