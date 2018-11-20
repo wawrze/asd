@@ -1,4 +1,9 @@
 rootProject.name = 'ads'
 include 'exercise_1'
 include 'exercise_2'
+include 'exercise3'
+include 'exercise3'
+findProject(':exercise3')?.name = 'exercise_3'
+include 'exercise_3'
+findProject(':exercise_3')?.name = 'exercise3'
 
