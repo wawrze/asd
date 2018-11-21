@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.wawrze.asd.exercise2.FibonacciTestSuite" tests="5" skipped="0" failures="0" errors="0" timestamp="2018-11-20T20:17:21" hostname="WawraHyperbook" time="0.032">
+  <properties/>
+  <testcase name="testFibonacci1" classname="com.wawrze.asd.exercise2.FibonacciTestSuite" time="0.016"/>
+  <testcase name="testFibonacci2" classname="com.wawrze.asd.exercise2.FibonacciTestSuite" time="0.002"/>
+  <testcase name="testFibonacci3" classname="com.wawrze.asd.exercise2.FibonacciTestSuite" time="0.005"/>
+  <testcase name="testFibonacci4" classname="com.wawrze.asd.exercise2.FibonacciTestSuite" time="0.005"/>
+  <testcase name="testFibonacci5" classname="com.wawrze.asd.exercise2.FibonacciTestSuite" time="0.004"/>
+  <system-out><![CDATA[Result of the algorithm:
+ n=400
+0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377
+Result saved to file "Out02.01.txt"
+Result of the algorithm:
+ n=1
+0
+Result saved to file "Out02.01.txt"
+Result of the algorithm:
+ n=2
+0, 1, 1
+Result saved to file "Out02.01.txt"
+Result of the algorithm:
+ n=3
+0, 1, 1, 2
+Result saved to file "Out02.01.txt"
+Result of the algorithm:
+ n=4200
+0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181
+Result saved to file "Out02.01.txt"
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

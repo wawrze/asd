@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.wawrze.asd.exercise2.TestSuite" tests="4" skipped="0" failures="0" errors="0" timestamp="2018-11-20T20:17:20" hostname="WawraHyperbook" time="0.034">
+  <properties/>
+  <testcase name="testAlgorithmsfromFile" classname="com.wawrze.asd.exercise2.TestSuite" time="0.023"/>
+  <testcase name="testAlgorithmsFromGivenArray1" classname="com.wawrze.asd.exercise2.TestSuite" time="0.004"/>
+  <testcase name="testAlgorithmsFromGivenArray2" classname="com.wawrze.asd.exercise2.TestSuite" time="0.004"/>
+  <testcase name="testAlgorithmsFromGivenArray3" classname="com.wawrze.asd.exercise2.TestSuite" time="0.002"/>
+  <system-out><![CDATA[Number of basic operations made by algorithm 1: 76
+Number of basic operations made by algorithm 2: 16
+Result of running algorithm 1: 4
+Result of running algorithm 2: 4
+
+Results saved to file "out.txt"
+Number of basic operations made by algorithm 1: 91
+Number of basic operations made by algorithm 2: 19
+Result of running algorithm 1: 5
+Result of running algorithm 2: 5
+
+Results saved to file "out.txt"
+Number of basic operations made by algorithm 1: 169
+Number of basic operations made by algorithm 2: 22
+Result of running algorithm 1: 8
+Result of running algorithm 2: 8
+
+Results saved to file "out.txt"
+Number of basic operations made by algorithm 1: 381
+Number of basic operations made by algorithm 2: 42
+Result of running algorithm 1: 10
+Result of running algorithm 2: 10
+
+Results saved to file "out.txt"
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

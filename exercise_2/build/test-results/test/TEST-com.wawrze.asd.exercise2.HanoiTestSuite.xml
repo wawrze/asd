@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.wawrze.asd.exercise2.HanoiTestSuite" tests="3" skipped="0" failures="0" errors="0" timestamp="2018-11-20T20:17:21" hostname="WawraHyperbook" time="0.015">
+  <properties/>
+  <testcase name="testHanoi1" classname="com.wawrze.asd.exercise2.HanoiTestSuite" time="0.007"/>
+  <testcase name="testHanoi2" classname="com.wawrze.asd.exercise2.HanoiTestSuite" time="0.005"/>
+  <testcase name="testHanoi3" classname="com.wawrze.asd.exercise2.HanoiTestSuite" time="0.002"/>
+  <system-out><![CDATA[Result of the algorithm:
+ n=3
+1->2, 1->3, 2->3, 1->2, 3->1, 3->2, 1->2, 
+Result saved to file "Out0202.txt"
+Result of the algorithm:
+ n=4
+1->3, 1->2, 3->2, 1->3, 2->1, 2->3, 1->3, 1->2, 3->2, 3->1, 2->1, 3->2, 1->3, 1->2, 3->2, 
+Result saved to file "Out0202.txt"
+Result of the algorithm:
+ n=5
+1->2, 1->3, 2->3, 1->2, 3->1, 3->2, 1->2, 1->3, 2->3, 2->1, 3->1, 2->3, 1->2, 1->3, 2->3, 1->2, 3->1, 3->2, 1->2, 3->1, 2->3, 2->1, 3->1, 3->2, 1->2, 1->3, 2->3, 1->2, 3->1, 3->2, 1->2, 
+Result saved to file "Out0202.txt"
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
