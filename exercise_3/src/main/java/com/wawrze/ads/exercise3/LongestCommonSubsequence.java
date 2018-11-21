@@ -12,8 +12,43 @@ public class LongestCommonSubsequence implements Algorithm {
     private Scanner reader;
 
     private String lcsAlgorithm(String[] input) {
-
-        return "";
+        String s1 = input[0];
+        String s2 = input[1];
+        int n = s1.length() + 1;
+        int m = s2.length() + 1;
+        int array[][] = new int[n][m];
+        for(int i = 0;i < n;i++) {
+            for(int j = 0;j < m;j++) {
+                if(i == 0 || j ==0) {
+                    array[i][j] = 0;
+                }
+                else if(s1.charAt(i - 1) == s2.charAt(j - 1)) {
+                    array[i][j] = array[i - 1][j - 1] + 1;
+                }
+                else {
+                    array[i][j] = Math.max(array[i][j - 1], array[i - 1][j]);
+                }
+            }
+        }
+        char[] result = new char[array[n - 1][m - 1]];
+        int i = n - 1;
+        int j = m - 1;
+        int k = result.length - 1;
+        while(i >= 0 && j >= 0 && k >= 0) {
+            if(array[i - 1][j] == array[i][j]) {
+                i--;
+            }
+            else if(array[i][j - 1] == array[i][j]) {
+                j--;
+            }
+            else {
+                result[k] = s1.charAt(i - 1);
+                i--;
+                j--;
+                k--;
+            }
+        }
+        return String.copyValueOf(result);
     }
 
     @Override
