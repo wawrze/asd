@@ -3,8 +3,7 @@ package com.wawrze.ads.exercise3;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Dijkstra implements Algorithm {
 
@@ -13,8 +12,60 @@ public class Dijkstra implements Algorithm {
     private final static int MAX_WEIGHT = 100;
 
     private int[][] dijkstra(int[][] input) {
+        int pointsQuantity = input[0][0];
+        int sourcePoint = input[0][1];
+        int[][] distancesMatrix = new int[pointsQuantity][pointsQuantity];
+        int[] unknownDistanceFromSource = new int[pointsQuantity];
+        boolean[] isDistanceKnown = new boolean[pointsQuantity];
+        int[] previousPoint = new int[pointsQuantity];
+        Set<Integer> unvisitedPoints = new HashSet<>();
+        for(int i = 1;i <= pointsQuantity;i++) {
+            for(int j = 0;j < pointsQuantity;j++) {
+                distancesMatrix[i - 1][j] = input[i][j];
+            }
+            unknownDistanceFromSource[i - 1] = MAX_WEIGHT * 10 - 1;
+            previousPoint[i - 1] = MAX_WEIGHT * 10 - 1;
+            isDistanceKnown[i - 1] = false;
+            unvisitedPoints.add(i - 1);
+        }
+        unknownDistanceFromSource[sourcePoint - 1] = 0;
+        while(!unvisitedPoints.isEmpty()) {
+            int min = MAX_WEIGHT * 10;
+            int point = MAX_WEIGHT;
+            for(int i = 0;i < unknownDistanceFromSource.length;i++) {
+                if(unknownDistanceFromSource[i] < min && !isDistanceKnown[i]) {
+                    min = unknownDistanceFromSource[i];
+                    point = i;
+                }
+            }
+            unvisitedPoints.remove(point);
+            isDistanceKnown[point] = true;
+            for(int i = 0;i < pointsQuantity;i++) {
+                if(unvisitedPoints.contains(i)) {
+                    if(distancesMatrix[point][i] <= MAX_WEIGHT) {
+                        int distance = unknownDistanceFromSource[point];
 
-        return new int[2][0];
+                            distance += distancesMatrix[point][i];
+
+                        if(distance < unknownDistanceFromSource[i]) {
+                            unknownDistanceFromSource[i] = distance;
+                            previousPoint[i] = point;
+                        }
+                    }
+                }
+            }
+        }
+        int[][] result = new int[2][pointsQuantity];
+        result[0] = unknownDistanceFromSource;
+        for(int i = 0;i < pointsQuantity;i++) {
+            if(previousPoint[i] <= MAX_WEIGHT) {
+                result[1][i] = previousPoint[i] + 1;
+            }
+            else {
+                result[1][i] = -1;
+            }
+        }
+        return result;
     }
 
     @Override
@@ -44,7 +95,7 @@ public class Dijkstra implements Algorithm {
                     for(int j = 0;j < n;j++) {
                         int r = rand.nextInt(2);
                         if(r == 1 && i != j) {
-                            randomInput[i][j] = rand.nextInt(MAX_WEIGHT) + 1;
+                            randomInput[i][j] = rand.nextInt(MAX_WEIGHT);
                         }
                         else {
                             randomInput[i][j] = MAX_WEIGHT * 10 - 1;
