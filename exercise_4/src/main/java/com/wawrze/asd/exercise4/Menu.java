@@ -3,6 +3,7 @@ package com.wawrze.asd.exercise4;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Locale;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -28,7 +29,7 @@ public class Menu {
         Random rand = new Random();
         switch (o) {
             case "g":
-                int numberOfBanks = rand.nextInt(20) + 1;
+                int numberOfBanks = rand.nextInt(9999) + 1;
                 int safetyFactor = rand.nextInt(10) + 1;
                 double chfPrice = 2 + rand.nextInt(4) + rand.nextDouble();
                 double value = chfPrice * 100;
@@ -63,29 +64,32 @@ public class Menu {
                     writer = new PrintWriter(file.getName());
                 } catch (IOException e) {
                 }
-                StringBuilder input = new StringBuilder();
-                input.append(numberOfBanks + " " + safetyFactor + " " + chfPrice + " " + eurPrice + " " + firstBank
-                        + " " + secondBank);
+                StringBuilder generatedInput = new StringBuilder();
+                generatedInput.append(numberOfBanks + " " + safetyFactor + " " + chfPrice + " " + eurPrice + " "
+                        + firstBank + " " + secondBank);
                 for(int i = 0;i < numberOfBanks;i++) {
-                    input.append("\n");
+                    generatedInput.append("\n");
                     for(int j = 0;j < numberOfBanks;j++) {
-                        input.append(srMatrix[i][j] + " ");
+                        generatedInput.append(srMatrix[i][j] + " ");
                     }
                 }
-                writer.print(input.toString());
-                System.out.println("Generated input:\n" + input.toString() + "\nsaved to file \"in0501.txt\"");
+                writer.print(generatedInput.toString());
+                System.out.println("Generated input:\n" + generatedInput.toString() + "\nsaved to file \"in0501.txt\"");
                 writer.close();
                 break;
             case "f":
-
-//                runAlgorithm();
+                Input input = fileReader();
+                Algorithm algorithm = new Algorithm(input);
+                int[][] result = algorithm.runAlgorithm();
+                String resultStrigified = fileWriter(result);
+                System.out.println("Result of the algorithm:\n" + resultStrigified);
                 break;
             default:
                 break;
         }
     }
 
-    private void fileWriter(int[][] result) {
+    private String fileWriter(int[][] result) {
         File file = new File("out0501.txt");
         if (!file.exists()) {
             try {
@@ -107,13 +111,14 @@ public class Menu {
         }
         writer.print(resultStringified);
         writer.close();
+        return resultStringified.toString();
     }
 
     private Input fileReader() {
         File file = null;
         try {
             file = new File("in0501.txt");
-            reader = new Scanner(file);
+            reader = new Scanner(file).useLocale(Locale.US);
         } catch (IOException e) {
             System.out.println("File " + file.getName() + " couldn't be opened!");
             return null;
