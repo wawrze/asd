@@ -9,4 +9,5 @@ findProject(':exercise_3')?.name = 'exercise3'
 include 'exercise_3'
 findProject(':exercise_3')?.name = 'exercise3'
 include 'exercise_3'
+include 'exercise_4'
 

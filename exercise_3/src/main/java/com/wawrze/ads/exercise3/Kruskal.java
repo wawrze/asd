@@ -36,13 +36,11 @@ public class Kruskal implements Algorithm {
         private int edgesQuantity;
         private Edge[] edges;
 
-        public KruskalsAlgorithm(int pointsQuantity, int edgesQuantity, List<int[]> edgeList) {
-            this.pointsQuantity = pointsQuantity;
-            this.edgesQuantity = edgesQuantity;
-            edges = new Edge[this.edgesQuantity];
-            for (int i = 0; i< edgesQuantity; ++i) {
-                edges[i] = new Edge(edgeList.get(i)[0] - 1, edgeList.get(i)[1] - 1, edgeList.get(i)[2]);
+        private int findSubsetParent(Subset[] subsets, int i) {
+            if(subsets[i].parent != i) {
+                subsets[i].parent = findSubsetParent(subsets, subsets[i].parent);
             }
+            return subsets[i].parent;
         }
 
         public List<int[]> runKruskalsAlgorithm() {
@@ -74,13 +72,6 @@ public class Kruskal implements Algorithm {
             return resultList;
         }
 
-        private int findSubsetParent(Subset[] subsets, int i) {
-            if(subsets[i].parent != i) {
-                subsets[i].parent = findSubsetParent(subsets, subsets[i].parent);
-            }
-            return subsets[i].parent;
-        }
-
         private void connectPoints(Subset subsets[], int point1, int point2) {
             int point1root = findSubsetParent(subsets, point1);
             int point2root = findSubsetParent(subsets, point2);
@@ -97,6 +88,15 @@ public class Kruskal implements Algorithm {
             }
         }
 
+        public KruskalsAlgorithm(int pointsQuantity, int edgesQuantity, List<int[]> edgeList) {
+            this.pointsQuantity = pointsQuantity;
+            this.edgesQuantity = edgesQuantity;
+            edges = new Edge[this.edgesQuantity];
+            for (int i = 0; i< edgesQuantity; ++i) {
+                edges[i] = new Edge(edgeList.get(i)[0] - 1, edgeList.get(i)[1] - 1, edgeList.get(i)[2]);
+            }
+        }
+
     }
 
     private PrintWriter writer;
@@ -110,10 +110,10 @@ public class Kruskal implements Algorithm {
             System.out.println("Choose option:");
             System.out.println("(f) Run algorithm from file \"In0303.txt\"");
             System.out.println("(x) Exit to main menu");
-            o = sc.nextLine();
-            option(o);
-        } while(!o.equals("x"));
-    }
+        o = sc.nextLine();
+        option(o);
+    } while(!o.equals("x"));
+}
 
     private void option(String o) {
         switch (o) {
@@ -169,6 +169,7 @@ public class Kruskal implements Algorithm {
             pointer++;
         }
         reader.close();
+
         if(edges.size() != m) {
             System.out.println("Incorrect input!");
             return;
